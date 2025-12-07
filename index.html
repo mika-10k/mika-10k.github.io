@@ -1,0 +1,506 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проект - Главная страница</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Всплывающее окно */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+            .popup h2 {
+                margin-bottom: 20px;
+                color: #2c3e50;
+                text-align: center;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+            }
+
+            .form-group input {
+                width: 100%;
+                padding: 12px 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+            .btn:hover {
+                background-color: #2980b9;
+            }
+
+        .btn-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        /* Шапка с логотипом и контактами */
+        header {
+            background-color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            
+        }
+
+        .contacts {
+            flex: 1;
+            text-align: right;
+        }
+
+        .contact-item {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+            .contact-item i {
+                margin-right: 10px;
+                color: #3498db;
+                width: 20px;
+            }
+
+        .social-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-link {
+            display: inline-block;
+            color: #3498db;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+            .social-link:hover {
+                color: #2980b9;
+            }
+
+        /* Блок с фото */
+        .photo-section {
+            padding: 60px 0;
+            background-color: #fff;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .photo-placeholder {
+            width: 90%;
+            max-width: 800px;
+            height: 400px;
+            background-color: #ecf0f1;
+            margin: 0 auto;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #7f8c8d;
+            border: 2px dashed #bdc3c7;
+        }
+
+            .photo-placeholder i {
+                font-size: 60px;
+                margin-bottom: 20px;
+                color: #95a5a6;
+            }
+
+        /* Блок информации о проекте */
+        .project-info {
+            padding: 60px 0;
+            background-color: #fff;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 32px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+            .section-title:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 3px;
+                background-color: #3498db;
+            }
+
+        .project-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .project-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+            .project-text p {
+                margin-bottom: 20px;
+                font-size: 18px;
+                color: #555;
+            }
+
+        .project-media {
+            flex: 1;
+            min-width: 300px;
+            background-color: #ecf0f1;
+            height: 300px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #7f8c8d;
+            border: 2px dashed #bdc3c7;
+        }
+
+            .project-media i {
+                font-size: 50px;
+                margin-bottom: 20px;
+                color: #95a5a6;
+            }
+
+        /* Кнопка для вызова формы */
+        .call-btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .call-btn {
+            background-color: #2ecc71;
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+            .call-btn:hover {
+                background-color: #27ae60;
+            }
+
+        /* Футер */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+            .footer-section h3 {
+                margin-bottom: 20px;
+                font-size: 20px;
+            }
+
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contacts, .contact-item {
+                text-align: center;
+                justify-content: center;
+                margin-top: 15px;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .photo-placeholder {
+                height: 300px;
+            }
+
+            .project-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Всплывающее окно формы заявки -->
+    <div id="popupForm" class="popup-overlay">
+        <div class="popup">
+            <button class="btn-close" id="closePopup">&times;</button>
+            <h2>Заявка на обратный звонок</h2>
+            <form id="callbackForm">
+                <div class="form-group">
+                    <label for="name">Ваше имя *</label>
+                    <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Введите ваш номер телефона">
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение (необязательно)</label>
+                    <input type="text" id="message" name="message" placeholder="Введите ваше сообщение">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cube"></i> ЛОГОТИП
+                </div>
+                <div class="contacts">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i> +7 (999) 123-45-67
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i> info@project.ru
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-at"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Кнопка для вызова формы заявки -->
+    <div class="call-btn-container">
+        <button class="btn call-btn" id="openPopup">Оставить заявку на звонок</button>
+    </div>
+
+    <!-- Блок для фото -->
+    <section class="photo-section">
+        <div class="container">
+            <div class="photo-placeholder">
+                <i class="fas fa-camera"></i>
+                <h3>Место для фото</h3>
+                <p>Здесь будет размещено основное изображение</p>
+                <p><small>(поставьте любое фото, послезавтра отправлю нужное)</small></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок информации о проекте -->
+    <section class="project-info">
+        <div class="container">
+            <h2 class="section-title">О проекте</h2>
+            <div class="project-content">
+                <div class="project-text">
+                    <p>Здесь будет размещена информация о вашем проекте. Текст, фотографии и файлы будут отправлены позже.</p>
+                    <p>Этот блок предназначен для подробного описания проекта, его целей, преимуществ и особенностей.</p>
+                    <p>Вы можете рассказать о вашей команде, используемых технологиях, этапах работы и ожидаемых результатах.</p>
+                    <p>После получения материалов от вас, этот раздел будет полностью заполнен актуальной информацией.</p>
+                </div>
+                <div class="project-media">
+                    <i class="fas fa-images"></i>
+                    <h3>Фото и файлы проекта</h3>
+                    <p>Здесь будут размещены дополнительные материалы</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@project.ru</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Социальные сети</h3>
+                    <p>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i> Telegram</a> |
+                        <a href="#" class="social-link"><i class="fab fa-vk"></i> VK</a>
+                    </p>
+                    <p>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i> WhatsApp</a> |
+                        <a href="#" class="social-link"><i class="fas fa-at"></i> Email</a>
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Адрес</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Примерная, д. 1</p>
+                    <p>Работаем: Пн-Пт с 9:00 до 18:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Проект. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Управление всплывающим окном
+        const popupOverlay = document.getElementById('popupForm');
+        const openPopupBtn = document.getElementById('openPopup');
+        const closePopupBtn = document.getElementById('closePopup');
+        const callbackForm = document.getElementById('callbackForm');
+
+        // Открыть всплывающее окно
+        openPopupBtn.addEventListener('click', function() {
+            popupOverlay.style.display = 'flex';
+        });
+
+        // Закрыть всплывающее окно
+        closePopupBtn.addEventListener('click', function() {
+            popupOverlay.style.display = 'none';
+        });
+
+        // Закрыть окно при клике вне его
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = 'none';
+            }
+        });
+
+        // Обработка отправки формы
+        callbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Получаем данные из формы
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            // В реальном проекте здесь был бы код отправки данных на сервер
+            alert(`Спасибо, ${name}! Ваша заявка принята. Мы свяжемся с вами по номеру ${phone} в ближайшее время.`);
+
+            // Закрываем всплывающее окно
+            popupOverlay.style.display = 'none';
+
+            // Очищаем форму
+            callbackForm.reset();
+        });
+
+        // Простая маска для телефона
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+
+            if (value.length > 0) {
+                value = '+7 (' + value.substring(1, 4) + ') ' + value.substring(4, 7) + '-' + value.substring(7, 9) + '-' + value.substring(9, 11);
+            }
+
+            e.target.value = value.substring(0, 18);
+        });
+    </script>
+</body>
+</html>
