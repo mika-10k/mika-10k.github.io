@@ -1,0 +1,536 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NiceWayFood - Качественное питание</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка с логотипом */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #ff6b6b;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo span {
+            color: #4ecdc4;
+        }
+        
+        /* Основной контент */
+        main {
+            padding: 40px 0;
+        }
+        
+        .content-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-section {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Блок контактов */
+        .contacts-section {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contacts-section h2 {
+            color: #ff6b6b;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            font-size: 1.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            background-color: #4ecdc4;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .contact-text {
+            font-size: 1.1rem;
+        }
+        
+        .contact-text a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: #ff6b6b;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            color: #555;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-link.tt {
+            background-color: #25a3e1;
+            color: white;
+        }
+        
+        .social-link.vk {
+            background-color: #4c75a3;
+            color: white;
+        }
+        
+        .social-link.email {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        /* Блок с фото */
+        .photo-section {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .photo-section h2 {
+            color: #4ecdc4;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .photo-placeholder {
+            flex-grow: 1;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            border: 2px dashed #ddd;
+        }
+        
+        .photo-icon {
+            font-size: 4rem;
+            color: #ccc;
+        }
+        
+        /* Блок информации о проекте */
+        .project-info {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: 30px;
+        }
+        
+        .project-info h2 {
+            color: #ff9f43;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .info-placeholder {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            border: 2px dashed #ddd;
+            color: #888;
+        }
+        
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        /* Форма заявки на звонок */
+        .callback-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .callback-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .callback-form {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #888;
+        }
+        
+        .callback-form h3 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #4ecdc4;
+        }
+        
+        .submit-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff5252;
+        }
+        
+        /* Ссылка на всплывающее окно */
+        .callback-link {
+            display: inline-block;
+            background-color: #4ecdc4;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .callback-link:hover {
+            background-color: #3dbcb4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .copyright {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Всплывающая форма заявки на звонок -->
+    <div class="callback-modal" id="callbackModal">
+        <div class="callback-form">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h3>Заявка на звонок</h3>
+            <form id="callbackForm">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Номер телефона</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+7 (XXX) XXX-XX-XX">
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение (необязательно)</label>
+                    <input type="text" id="message" name="message" placeholder="Ваш вопрос или комментарий">
+                </div>
+                <button type="submit" class="submit-btn">Заказать звонок</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Шапка с логотипом -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <h1 class="logo">Nice<span>Way</span>Food</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <!-- Ссылка на всплывающее окно -->
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="callback-link" id="openModal">Заказать обратный звонок</button>
+        </div>
+
+        <!-- Блок контактов и фото -->
+        <div class="content-section">
+            <!-- Контакты -->
+            <section class="contacts-section">
+                <h2><i class="fas fa-address-book"></i> Контакты</h2>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>Телефон:</strong> 
+                        <a href="tel:+79824809472">+7 (982) 480-94-72</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>Email:</strong> 
+                        <a href="mailto:oksana.gasanova.70@mail.ru">oksana.gasanova.70@mail.ru</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="contact-text">
+                        <strong>Telegram:</strong> 
+                        <a href="https://t.me/NiceWayFood" target="_blank">@NiceWayFood</a>
+                    </div>
+                </div>
+                
+                
+                
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #555;">Мы в соцсетях:</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link tt" title="ТикТок">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <a href="#" class="social-link vk" title="ВКонтакте">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                    <a href="mailto:info@nicewayfood.ru" class="social-link email" title="Email">
+                        <i class="far fa-envelope"></i>
+                    </a>
+                </div>
+            </section>
+            
+            <!-- Место для фото -->
+            <section class="photo-section">
+                <h2></i>Текущая стадия разработки проекта:</h2>
+                
+                        
+                        <img src="разработка.jpg" alt="Фото">
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Место для информации о проекте -->
+        <section class="project-info">
+            <h2><i class="fas fa-info-circle"></i> О проекте NiceWayFood</h2>
+            <div class="info-placeholder">
+                <i class="fas fa-file-alt info-icon"></i>
+                <h3>Информация о проекте</h3>
+                <ul class="file-list">
+        <li><a href="Продукт.txt" download><i class="fas fa-file-text"></i> Продукт.txt</a></li>
+        <li><a href="ЦА.txt" download><i class="fas fa-file-text"></i> ЦА.txt</a></li>
+        <li><a href="доходы-расходы.txt" download><i class="fas fa-file-text"></i> доходы-расходы.txt</a></li>
+        <li><a href="Расчет экономии.txt" download><i class="fas fa-file-text"></i> Расчет экономии.txt</a></li>
+        <li><a href="канвас.png" download><i class="fas fa-file-image"></i> канвас.png</a></li>
+        <li><a href="презентация.pdf" download><i class="fas fa-file-powerpoint"></i> презентация.pdf</a></li>
+        
+    </ul>
+                <p>Текст, фотографии и файлы будут отправлены и размещены здесь позже.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Здесь будет подробное описание проекта, его цели, миссия и преимущества.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">NiceWayFood</div>
+            <p></p>
+            <div class="copyright">
+                &copy; 2025 NiceWayFood. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Открытие и закрытие модального окна
+        const openModalBtn = document.getElementById('openModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const callbackModal = document.getElementById('callbackModal');
+        
+        openModalBtn.addEventListener('click', () => {
+            callbackModal.classList.add('active');
+        });
+        
+        closeModalBtn.addEventListener('click', () => {
+            callbackModal.classList.remove('active');
+        });
+        
+        // Закрытие модального окна при клике вне его
+        callbackModal.addEventListener('click', (e) => {
+            if (e.target === callbackModal) {
+                callbackModal.classList.remove('active');
+            }
+        });
+        
+        // Обработка формы заявки
+        const callbackForm = document.getElementById('callbackForm');
+        
+        callbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            
+            // В реальном приложении здесь будет отправка данных на сервер
+            alert(`Спасибо, ${name}! Ваша заявка на звонок по номеру ${phone} принята. Мы свяжемся с вами в ближайшее время.`);
+            
+            // Очистка формы и закрытие модального окна
+            callbackForm.reset();
+            callbackModal.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
